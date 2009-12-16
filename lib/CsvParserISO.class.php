@@ -1,4 +1,7 @@
 <?php
+
+require dirname(__FILE__).'/CsvParser.class.php';
+
 /**
  * Classer pour parser des fichier csv qui sont au format windows-1252
  */

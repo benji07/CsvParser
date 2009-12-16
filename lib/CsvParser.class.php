@@ -22,7 +22,7 @@ abstract class CsvParser {
 
   public function parse($filename) {
     if(!file_exists($filename)) {
-      throw new Exception('File not found: '.$filenma);
+      throw new Exception('File not found: '.$filename);
     }
 
     $f = fopen($filename,'r');
