@@ -1,5 +1,5 @@
 <?php
-setLocale(LC_ALL, 'fr_FR.ISO-8859-1');
+
 /**
  * Classe pour gérer les traitements en csv
  */
