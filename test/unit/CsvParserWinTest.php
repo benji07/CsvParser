@@ -25,4 +25,4 @@ $parser = new MockupCsvParserWin();
 
 $parser->parse(dirname(__FILE__).'/../fixtures/mock_win.csv');
 
-$t->is($parser->data[0],$compare, 'Convert Window-1252 to UTF-8 string');
+$t->is($parser->data[0]->name,$compare->name, 'Convert Window-1252 to UTF-8 string');

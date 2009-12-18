@@ -1,4 +1,5 @@
 <?php
+setLocale(LC_ALL, 'fr_FR.ISO-8859-1');
 /**
  * Classe pour gérer les traitements en csv
  */
@@ -25,14 +26,16 @@ abstract class CsvParser {
       throw new Exception('File not found: '.$filename);
     }
 
-    $f = fopen($filename,'r');
-    if($this->_ignoreFirstLine) {
-      fgetcsv($f,0,$this->_separator);
-    }
-
     $this->preParse();
 
-    while($line = fgetcsv($f,0,$this->_separator)) {
+    $f = fopen($filename,'rb');
+    if($this->_ignoreFirstLine) {
+      fgets($f,1024);
+    }
+
+    while($line = fgets($f,1024)) {
+      $line = $this->clean($line);
+      $line = str_getcsv($line,$this->_separator);
       if(count($line) != count($this->_columns)) continue;
       $line = array_combine($this->_columns,$line);
       array_walk($line,array($this,'clean'));
@@ -64,7 +67,7 @@ abstract class CsvParser {
   /**
    * Méthode pour nettoyer le fichier csv
    */
-  public function clean(&$value, $key) {
-    $value = trim(stripslashes($value));
+  public function clean($value) {
+    return trim(stripslashes($value));
   }
 }

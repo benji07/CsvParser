@@ -7,7 +7,7 @@ require dirname(__FILE__).'/CsvParser.class.php';
  */
 abstract class CsvParserWin extends CsvParser{
 	
-	public function clean(&$value, $key){
-		$value = stripslashes(trim(iconv('Windows-1252', 'UTF-8//TRANSLIT',$value)));
+	public function clean($value){
+		return stripslashes(trim(iconv('Windows-1252', 'UTF-8//TRANSLIT//IGNORE',$value)));
 	}
 }

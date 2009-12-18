@@ -7,7 +7,7 @@ require dirname(__FILE__).'/CsvParser.class.php';
  */
 abstract class CsvParserISO extends CsvParser {
 
-  public function clean(&$value, $key) {
-    stripslashes(trim(iconv('ISO-8859-1', 'UTF-8//TRANSLIT',$value)));
+  public function clean($value) {
+    return stripslashes(trim(iconv('ISO-8859-1', 'UTF-8//TRANSLIT//IGNORE',$value)));
   }
 }
