@@ -29,6 +29,10 @@ abstract class CsvParser {
     $this->preParse();
 
     $f = fopen($filename,'rb');
+    if($f == null){
+      throw new Exception('Cound not open '.$filename.' for read');
+    }
+    
     if($this->_ignoreFirstLine) {
       fgets($f,1024);
     }
