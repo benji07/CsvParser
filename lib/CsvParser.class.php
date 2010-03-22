@@ -20,6 +20,7 @@ abstract class CsvParser {
    */
   protected $_separator = ';';
 
+  protected $_line_number = 0;
 
   public function parse($filename) {
     if(!file_exists($filename)) {
@@ -33,9 +34,12 @@ abstract class CsvParser {
       throw new Exception('Cound not open '.$filename.' for read');
     }
     
+    $this->_line_number = 0;    
     if($this->_ignoreFirstLine) {
       fgets($f,1024);
+      $this->_line_number++;
     }
+
 
     while($line = fgets($f,1024)) {
       $line = $this->clean($line);
@@ -43,6 +47,7 @@ abstract class CsvParser {
       if(count($line) != count($this->_columns)) continue;
       $line = array_combine($this->_columns,$line);
       array_walk($line,array($this,'clean'));
+      $this->_line_number++;
       $this->parseLine((object)$line);
     }
 
@@ -51,6 +56,8 @@ abstract class CsvParser {
 
   /**
    * Méthode qui est executer pour chaque ligne du fichier csv
+   * @param $line stdClass La ligne a traiter
+   * @param $i Le numéro de la ligne
    */
   abstract public function parseLine(stdClass $line);
 
