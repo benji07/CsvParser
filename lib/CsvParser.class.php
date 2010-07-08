@@ -84,12 +84,12 @@ abstract class CsvParser {
 }
 
 if(!function_exists('str_getcsv')){
-	function str_getcsv($input, $delimiter = ',', $enclosure = '"', $escape = '\\'){
-		$tmp = tmpfile();
-		fwrite($tmp, $input);
-		rewind($tmp);
-		$data = fgetcsv($tmp, null, $delimiter, $enclosure);
-		fclose($tmp);
-		return $data;
-	}
+  function str_getcsv($input, $delimiter = ',', $enclosure = '"', $escape = '\\'){
+    $tmp = tmpfile();
+    fwrite($tmp, $input);
+    rewind($tmp);
+    $data = fgetcsv($tmp, null, $delimiter, $enclosure);
+    fclose($tmp);
+    return $data;
+  }
 }
